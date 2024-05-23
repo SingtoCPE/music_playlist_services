@@ -1,0 +1,27 @@
+// export default {
+//   HOST: 'thsv41.hostatom.com',
+//   USER: 'yuzu_qbox',
+//   PASSWORD: 'P@ssw0rd',
+//   DB: 'qbox',
+//   dialect: 'mysql',
+//   pool: {
+//     max: 5,
+//     min: 0,
+//     acquire: 30000,
+//     idle: 10000
+//   }
+// }
+
+export default {
+  HOST: "suspicious-kepler.128-199-104-175.plesk.page",
+  USER: "admin_ms_list",
+  PASSWORD: "Singto11442525!",
+  DB: "admin_ms_list",
+  dialect: "mysql",
+  pool: {
+    max: 15,
+    min: 0,
+    acquire: 100000,
+    idle: 10000,
+  },
+};

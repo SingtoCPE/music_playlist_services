@@ -1,0 +1,2608 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "description": "This is an online swagger code generate server for Sitnee API",
+        "version": "2.4.18",
+        "title": "SITNEE API"
+    },
+    "basePath": "https://services.sitnee",
+    "tags": [{
+            "name": "users"
+        },
+        {
+            "name": "files"
+        },
+        {
+            "name": "skills"
+        },
+        {
+            "name": "jobs"
+        },
+        {
+            "name": "educations"
+        },
+        {
+            "name": "licenses"
+        },
+        {
+            "name": "serviceTypes"
+        },
+        {
+            "name": "feeCurrencies"
+        },
+        {
+            "name": "feeFrequencies"
+        },
+        {
+            "name": "termOfServices"
+        }
+    ],
+    "paths": {
+        "/users/login": {
+            "post": {
+                "tags": [
+                    "users"
+                ],
+                "summary": "Login get token and user data",
+                "consumes": [
+                    "application/json"
+                ],
+                "parameters": [{
+                    "in": "body",
+                    "name": "body",
+                    "schema": {
+                        "type": "object",
+                        "properties": {
+                            "email": {
+                                "type": "string",
+                                "default": "admin2"
+                            },
+                            "password": {
+                                "type": "string",
+                                "default": "1234"
+                            }
+                        }
+                    }
+                }],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "response_status": {
+                                    "type": "string",
+                                    "default": "SUCCESS"
+                                },
+                                "token": {
+                                    "type": "string",
+                                    "default": "token"
+                                },
+                                "data": {
+                                    "type": "object",
+                                    "default": {}
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/users": {
+            "get": {
+                "tags": [
+                    "users"
+                ],
+                "summary": "Get all users",
+                "consumes": [
+                    "application/json"
+                ],
+                "parameters": [{
+                    "in": "header",
+                    "name": "Authorization",
+                    "schema": {
+                        "type": "string"
+                    },
+                    "description": "Bearer {token}"
+                }],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "response_status": {
+                                    "type": "string",
+                                    "default": "SUCCESS"
+                                },
+                                "data": {
+                                    "type": "object",
+                                    "default": []
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "users"
+                ],
+                "summary": "Register",
+                "consumes": [
+                    "application/json"
+                ],
+                "parameters": [{
+                    "in": "body",
+                    "name": "body",
+                    "schema": {
+                        "$ref": "#/definitions/User"
+                    }
+                }],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "response_status": {
+                                    "type": "string",
+                                    "default": "SUCCESS"
+                                },
+                                "data": {
+                                    "type": "object",
+                                    "default": {}
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/users/{id}": {
+            "get": {
+                "tags": [
+                    "users"
+                ],
+                "summary": "Get user by ID",
+                "consumes": [
+                    "application/json"
+                ],
+                "parameters": [{
+                        "in": "header",
+                        "name": "Authorization",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "Bearer {token}"
+                    },
+                    {
+                        "in": "path",
+                        "name": "id",
+                        "schema": {
+                            "type": "integer"
+                        },
+                        "description": "user ID"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "response_status": {
+                                    "type": "string",
+                                    "default": "SUCCESS"
+                                },
+                                "data": {
+                                    "type": "object",
+                                    "default": {}
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "users"
+                ],
+                "summary": "Update user by user ID",
+                "consumes": [
+                    "application/json"
+                ],
+                "parameters": [{
+                        "in": "header",
+                        "name": "Authorization",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "Bearer {token}"
+                    },
+                    {
+                        "in": "path",
+                        "name": "id",
+                        "schema": {
+                            "type": "integer"
+                        },
+                        "description": "user ID"
+                    },
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "schema": {
+                            "$ref": "#/definitions/User"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "response_status": {
+                                    "type": "string",
+                                    "default": "SUCCESS"
+                                },
+                                "message": {
+                                    "type": "string",
+                                    "default": "User was updated successfully"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "users"
+                ],
+                "summary": "Delete user by ID",
+                "consumes": [
+                    "application/json"
+                ],
+                "parameters": [{
+                        "in": "header",
+                        "name": "Authorization",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "Bearer {token}"
+                    },
+                    {
+                        "in": "path",
+                        "name": "id",
+                        "schema": {
+                            "type": "integer"
+                        },
+                        "description": "user ID"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "response_status": {
+                                    "type": "string",
+                                    "default": "SUCCESS"
+                                },
+                                "data": {
+                                    "type": "object",
+                                    "default": {}
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/upload/formData": {
+            "post": {
+                "tags": [
+                    "files"
+                ],
+                "summary": "Upload file",
+                "consumes": [
+                    "application/json"
+                ],
+                "parameters": [{
+                        "in": "formData",
+                        "name": "file",
+                        "type": "file",
+                        "description": "The file to upload."
+                    },
+                    {
+                        "in": "formData",
+                        "name": "type",
+                        "type": "string",
+                        "description": "Type of file"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "response_status": {
+                                    "type": "string",
+                                    "default": "SUCCESS"
+                                },
+                                "data": {
+                                    "type": "object",
+                                    "default": {}
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/upload/base64": {
+            "post": {
+                "tags": [
+                    "files"
+                ],
+                "summary": "Upload file",
+                "consumes": [
+                    "application/json"
+                ],
+                "parameters": [{
+                    "in": "body",
+                    "name": "body",
+                    "schema": {
+                        "$ref": "#/definitions/Base64File"
+                    }
+                }],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "response_status": {
+                                    "type": "string",
+                                    "default": "SUCCESS"
+                                },
+                                "data": {
+                                    "type": "object",
+                                    "default": {}
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/skills": {
+            "get": {
+                "tags": [
+                    "skills"
+                ],
+                "summary": "Get all skills",
+                "consumes": [
+                    "application/json"
+                ],
+                "parameters": [{
+                    "in": "header",
+                    "name": "Authorization",
+                    "schema": {
+                        "type": "string"
+                    },
+                    "description": "Bearer {token}"
+                }],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "response_status": {
+                                    "type": "string",
+                                    "default": "SUCCESS"
+                                },
+                                "data": {
+                                    "type": "object",
+                                    "default": []
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "skills"
+                ],
+                "summary": "Add skill",
+                "consumes": [
+                    "application/json"
+                ],
+                "parameters": [{
+                        "in": "header",
+                        "name": "Authorization",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "Bearer {token}"
+                    },
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "schema": {
+                            "$ref": "#/definitions/Skill"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "response_status": {
+                                    "type": "string",
+                                    "default": "SUCCESS"
+                                },
+                                "data": {
+                                    "type": "object",
+                                    "default": {}
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/skills/{id}": {
+            "get": {
+                "tags": [
+                    "skills"
+                ],
+                "summary": "Get skill by ID",
+                "consumes": [
+                    "application/json"
+                ],
+                "parameters": [{
+                        "in": "header",
+                        "name": "Authorization",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "Bearer {token}"
+                    },
+                    {
+                        "in": "path",
+                        "name": "id",
+                        "schema": {
+                            "type": "integer"
+                        },
+                        "description": "skill ID"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "response_status": {
+                                    "type": "string",
+                                    "default": "SUCCESS"
+                                },
+                                "data": {
+                                    "type": "object",
+                                    "default": {}
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "skills"
+                ],
+                "summary": "Update skill by user ID",
+                "consumes": [
+                    "application/json"
+                ],
+                "parameters": [{
+                        "in": "header",
+                        "name": "Authorization",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "Bearer {token}"
+                    },
+                    {
+                        "in": "path",
+                        "name": "id",
+                        "schema": {
+                            "type": "integer"
+                        },
+                        "description": "skill ID"
+                    },
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "schema": {
+                            "$ref": "#/definitions/Skill"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "response_status": {
+                                    "type": "string",
+                                    "default": "SUCCESS"
+                                },
+                                "message": {
+                                    "type": "string",
+                                    "default": "User was updated successfully"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "skills"
+                ],
+                "summary": "Delete skill by ID",
+                "consumes": [
+                    "application/json"
+                ],
+                "parameters": [{
+                        "in": "header",
+                        "name": "Authorization",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "Bearer {token}"
+                    },
+                    {
+                        "in": "path",
+                        "name": "id",
+                        "schema": {
+                            "type": "integer"
+                        },
+                        "description": "skill ID"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "response_status": {
+                                    "type": "string",
+                                    "default": "SUCCESS"
+                                },
+                                "data": {
+                                    "type": "object",
+                                    "default": {}
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/jobs": {
+            "get": {
+                "tags": [
+                    "jobs"
+                ],
+                "summary": "Get all jobs",
+                "consumes": [
+                    "application/json"
+                ],
+                "parameters": [{
+                    "in": "header",
+                    "name": "Authorization",
+                    "schema": {
+                        "type": "string"
+                    },
+                    "description": "Bearer {token}"
+                }],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "response_status": {
+                                    "type": "string",
+                                    "default": "SUCCESS"
+                                },
+                                "data": {
+                                    "type": "object",
+                                    "default": []
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "jobs"
+                ],
+                "summary": "Add job",
+                "consumes": [
+                    "application/json"
+                ],
+                "parameters": [{
+                        "in": "header",
+                        "name": "Authorization",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "Bearer {token}"
+                    },
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "schema": {
+                            "$ref": "#/definitions/Job"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "response_status": {
+                                    "type": "string",
+                                    "default": "SUCCESS"
+                                },
+                                "data": {
+                                    "type": "object",
+                                    "default": {}
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/jobs/{id}": {
+            "get": {
+                "tags": [
+                    "jobs"
+                ],
+                "summary": "Get job by ID",
+                "consumes": [
+                    "application/json"
+                ],
+                "parameters": [{
+                        "in": "header",
+                        "name": "Authorization",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "Bearer {token}"
+                    },
+                    {
+                        "in": "path",
+                        "name": "id",
+                        "schema": {
+                            "type": "integer"
+                        },
+                        "description": "job ID"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "response_status": {
+                                    "type": "string",
+                                    "default": "SUCCESS"
+                                },
+                                "data": {
+                                    "type": "object",
+                                    "default": {}
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "jobs"
+                ],
+                "summary": "Update job by user ID",
+                "consumes": [
+                    "application/json"
+                ],
+                "parameters": [{
+                        "in": "header",
+                        "name": "Authorization",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "Bearer {token}"
+                    },
+                    {
+                        "in": "path",
+                        "name": "id",
+                        "schema": {
+                            "type": "integer"
+                        },
+                        "description": "job ID"
+                    },
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "schema": {
+                            "$ref": "#/definitions/Job"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "response_status": {
+                                    "type": "string",
+                                    "default": "SUCCESS"
+                                },
+                                "message": {
+                                    "type": "string",
+                                    "default": "User was updated successfully"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "jobs"
+                ],
+                "summary": "Delete job by ID",
+                "consumes": [
+                    "application/json"
+                ],
+                "parameters": [{
+                        "in": "header",
+                        "name": "Authorization",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "Bearer {token}"
+                    },
+                    {
+                        "in": "path",
+                        "name": "id",
+                        "schema": {
+                            "type": "integer"
+                        },
+                        "description": "job ID"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "response_status": {
+                                    "type": "string",
+                                    "default": "SUCCESS"
+                                },
+                                "data": {
+                                    "type": "object",
+                                    "default": {}
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/educations": {
+            "get": {
+                "tags": [
+                    "educations"
+                ],
+                "summary": "Get all educations",
+                "consumes": [
+                    "application/json"
+                ],
+                "parameters": [{
+                    "in": "header",
+                    "name": "Authorization",
+                    "schema": {
+                        "type": "string"
+                    },
+                    "description": "Bearer {token}"
+                }],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "response_status": {
+                                    "type": "string",
+                                    "default": "SUCCESS"
+                                },
+                                "data": {
+                                    "type": "object",
+                                    "default": []
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "educations"
+                ],
+                "summary": "Add education",
+                "consumes": [
+                    "application/json"
+                ],
+                "parameters": [{
+                        "in": "header",
+                        "name": "Authorization",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "Bearer {token}"
+                    },
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "schema": {
+                            "$ref": "#/definitions/Education"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "response_status": {
+                                    "type": "string",
+                                    "default": "SUCCESS"
+                                },
+                                "data": {
+                                    "type": "object",
+                                    "default": {}
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/educations/{id}": {
+            "get": {
+                "tags": [
+                    "educations"
+                ],
+                "summary": "Get education by ID",
+                "consumes": [
+                    "application/json"
+                ],
+                "parameters": [{
+                        "in": "header",
+                        "name": "Authorization",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "Bearer {token}"
+                    },
+                    {
+                        "in": "path",
+                        "name": "id",
+                        "schema": {
+                            "type": "integer"
+                        },
+                        "description": "education ID"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "response_status": {
+                                    "type": "string",
+                                    "default": "SUCCESS"
+                                },
+                                "data": {
+                                    "type": "object",
+                                    "default": {}
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "educations"
+                ],
+                "summary": "Update education by user ID",
+                "consumes": [
+                    "application/json"
+                ],
+                "parameters": [{
+                        "in": "header",
+                        "name": "Authorization",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "Bearer {token}"
+                    },
+                    {
+                        "in": "path",
+                        "name": "id",
+                        "schema": {
+                            "type": "integer"
+                        },
+                        "description": "education ID"
+                    },
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "schema": {
+                            "$ref": "#/definitions/Education"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "response_status": {
+                                    "type": "string",
+                                    "default": "SUCCESS"
+                                },
+                                "message": {
+                                    "type": "string",
+                                    "default": "User was updated successfully"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "educations"
+                ],
+                "summary": "Delete education by ID",
+                "consumes": [
+                    "application/json"
+                ],
+                "parameters": [{
+                        "in": "header",
+                        "name": "Authorization",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "Bearer {token}"
+                    },
+                    {
+                        "in": "path",
+                        "name": "id",
+                        "schema": {
+                            "type": "integer"
+                        },
+                        "description": "education ID"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "response_status": {
+                                    "type": "string",
+                                    "default": "SUCCESS"
+                                },
+                                "data": {
+                                    "type": "object",
+                                    "default": {}
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/licenses": {
+            "get": {
+                "tags": [
+                    "licenses"
+                ],
+                "summary": "Get all licenses",
+                "consumes": [
+                    "application/json"
+                ],
+                "parameters": [{
+                    "in": "header",
+                    "name": "Authorization",
+                    "schema": {
+                        "type": "string"
+                    },
+                    "description": "Bearer {token}"
+                }],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "response_status": {
+                                    "type": "string",
+                                    "default": "SUCCESS"
+                                },
+                                "data": {
+                                    "type": "object",
+                                    "default": []
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "licenses"
+                ],
+                "summary": "Add license",
+                "consumes": [
+                    "application/json"
+                ],
+                "parameters": [{
+                        "in": "header",
+                        "name": "Authorization",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "Bearer {token}"
+                    },
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "schema": {
+                            "$ref": "#/definitions/License"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "response_status": {
+                                    "type": "string",
+                                    "default": "SUCCESS"
+                                },
+                                "data": {
+                                    "type": "object",
+                                    "default": {}
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/licenses/{id}": {
+            "get": {
+                "tags": [
+                    "licenses"
+                ],
+                "summary": "Get license by ID",
+                "consumes": [
+                    "application/json"
+                ],
+                "parameters": [{
+                        "in": "header",
+                        "name": "Authorization",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "Bearer {token}"
+                    },
+                    {
+                        "in": "path",
+                        "name": "id",
+                        "schema": {
+                            "type": "integer"
+                        },
+                        "description": "license ID"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "response_status": {
+                                    "type": "string",
+                                    "default": "SUCCESS"
+                                },
+                                "data": {
+                                    "type": "object",
+                                    "default": {}
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "licenses"
+                ],
+                "summary": "Update license by user ID",
+                "consumes": [
+                    "application/json"
+                ],
+                "parameters": [{
+                        "in": "header",
+                        "name": "Authorization",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "Bearer {token}"
+                    },
+                    {
+                        "in": "path",
+                        "name": "id",
+                        "schema": {
+                            "type": "integer"
+                        },
+                        "description": "license ID"
+                    },
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "schema": {
+                            "$ref": "#/definitions/License"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "response_status": {
+                                    "type": "string",
+                                    "default": "SUCCESS"
+                                },
+                                "message": {
+                                    "type": "string",
+                                    "default": "User was updated successfully"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "licenses"
+                ],
+                "summary": "Delete license by ID",
+                "consumes": [
+                    "application/json"
+                ],
+                "parameters": [{
+                        "in": "header",
+                        "name": "Authorization",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "Bearer {token}"
+                    },
+                    {
+                        "in": "path",
+                        "name": "id",
+                        "schema": {
+                            "type": "integer"
+                        },
+                        "description": "license ID"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "response_status": {
+                                    "type": "string",
+                                    "default": "SUCCESS"
+                                },
+                                "data": {
+                                    "type": "object",
+                                    "default": {}
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/serviceTypes": {
+            "get": {
+                "tags": [
+                    "serviceTypes"
+                ],
+                "summary": "Get all serviceTypes",
+                "consumes": [
+                    "application/json"
+                ],
+                "parameters": [{
+                    "in": "header",
+                    "name": "Authorization",
+                    "schema": {
+                        "type": "string"
+                    },
+                    "description": "Bearer {token}"
+                }],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "response_status": {
+                                    "type": "string",
+                                    "default": "SUCCESS"
+                                },
+                                "data": {
+                                    "type": "object",
+                                    "default": []
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "serviceTypes"
+                ],
+                "summary": "Add serviceType",
+                "consumes": [
+                    "application/json"
+                ],
+                "parameters": [{
+                        "in": "header",
+                        "name": "Authorization",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "Bearer {token}"
+                    },
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "schema": {
+                            "$ref": "#/definitions/ServiceType"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "response_status": {
+                                    "type": "string",
+                                    "default": "SUCCESS"
+                                },
+                                "data": {
+                                    "type": "object",
+                                    "default": {}
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/serviceTypes/{id}": {
+            "get": {
+                "tags": [
+                    "serviceTypes"
+                ],
+                "summary": "Get serviceType by ID",
+                "consumes": [
+                    "application/json"
+                ],
+                "parameters": [{
+                        "in": "header",
+                        "name": "Authorization",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "Bearer {token}"
+                    },
+                    {
+                        "in": "path",
+                        "name": "id",
+                        "schema": {
+                            "type": "integer"
+                        },
+                        "description": "serviceType ID"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "response_status": {
+                                    "type": "string",
+                                    "default": "SUCCESS"
+                                },
+                                "data": {
+                                    "type": "object",
+                                    "default": {}
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "serviceTypes"
+                ],
+                "summary": "Update serviceType by user ID",
+                "consumes": [
+                    "application/json"
+                ],
+                "parameters": [{
+                        "in": "header",
+                        "name": "Authorization",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "Bearer {token}"
+                    },
+                    {
+                        "in": "path",
+                        "name": "id",
+                        "schema": {
+                            "type": "integer"
+                        },
+                        "description": "serviceType ID"
+                    },
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "schema": {
+                            "$ref": "#/definitions/ServiceType"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "response_status": {
+                                    "type": "string",
+                                    "default": "SUCCESS"
+                                },
+                                "message": {
+                                    "type": "string",
+                                    "default": "User was updated successfully"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "serviceTypes"
+                ],
+                "summary": "Delete serviceType by ID",
+                "consumes": [
+                    "application/json"
+                ],
+                "parameters": [{
+                        "in": "header",
+                        "name": "Authorization",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "Bearer {token}"
+                    },
+                    {
+                        "in": "path",
+                        "name": "id",
+                        "schema": {
+                            "type": "integer"
+                        },
+                        "description": "serviceType ID"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "response_status": {
+                                    "type": "string",
+                                    "default": "SUCCESS"
+                                },
+                                "data": {
+                                    "type": "object",
+                                    "default": {}
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/feeCurrencies": {
+            "get": {
+                "tags": [
+                    "feeCurrencies"
+                ],
+                "summary": "Get all feeCurrencies",
+                "consumes": [
+                    "application/json"
+                ],
+                "parameters": [{
+                    "in": "header",
+                    "name": "Authorization",
+                    "schema": {
+                        "type": "string"
+                    },
+                    "description": "Bearer {token}"
+                }],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "response_status": {
+                                    "type": "string",
+                                    "default": "SUCCESS"
+                                },
+                                "data": {
+                                    "type": "object",
+                                    "default": []
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "feeCurrencies"
+                ],
+                "summary": "Add feeCurrency",
+                "consumes": [
+                    "application/json"
+                ],
+                "parameters": [{
+                        "in": "header",
+                        "name": "Authorization",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "Bearer {token}"
+                    },
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "schema": {
+                            "$ref": "#/definitions/FeeCurrency"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "response_status": {
+                                    "type": "string",
+                                    "default": "SUCCESS"
+                                },
+                                "data": {
+                                    "type": "object",
+                                    "default": {}
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/feeCurrencies/{id}": {
+            "get": {
+                "tags": [
+                    "feeCurrencies"
+                ],
+                "summary": "Get feeCurrency by ID",
+                "consumes": [
+                    "application/json"
+                ],
+                "parameters": [{
+                        "in": "header",
+                        "name": "Authorization",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "Bearer {token}"
+                    },
+                    {
+                        "in": "path",
+                        "name": "id",
+                        "schema": {
+                            "type": "integer"
+                        },
+                        "description": "feeCurrency ID"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "response_status": {
+                                    "type": "string",
+                                    "default": "SUCCESS"
+                                },
+                                "data": {
+                                    "type": "object",
+                                    "default": {}
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "feeCurrencies"
+                ],
+                "summary": "Update feeCurrency by user ID",
+                "consumes": [
+                    "application/json"
+                ],
+                "parameters": [{
+                        "in": "header",
+                        "name": "Authorization",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "Bearer {token}"
+                    },
+                    {
+                        "in": "path",
+                        "name": "id",
+                        "schema": {
+                            "type": "integer"
+                        },
+                        "description": "feeCurrency ID"
+                    },
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "schema": {
+                            "$ref": "#/definitions/FeeCurrency"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "response_status": {
+                                    "type": "string",
+                                    "default": "SUCCESS"
+                                },
+                                "message": {
+                                    "type": "string",
+                                    "default": "User was updated successfully"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "feeCurrencies"
+                ],
+                "summary": "Delete feeCurrency by ID",
+                "consumes": [
+                    "application/json"
+                ],
+                "parameters": [{
+                        "in": "header",
+                        "name": "Authorization",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "Bearer {token}"
+                    },
+                    {
+                        "in": "path",
+                        "name": "id",
+                        "schema": {
+                            "type": "integer"
+                        },
+                        "description": "feeCurrency ID"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "response_status": {
+                                    "type": "string",
+                                    "default": "SUCCESS"
+                                },
+                                "data": {
+                                    "type": "object",
+                                    "default": {}
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/feeFrequencies": {
+            "get": {
+                "tags": [
+                    "feeFrequencies"
+                ],
+                "summary": "Get all feeFrequencies",
+                "consumes": [
+                    "application/json"
+                ],
+                "parameters": [{
+                    "in": "header",
+                    "name": "Authorization",
+                    "schema": {
+                        "type": "string"
+                    },
+                    "description": "Bearer {token}"
+                }],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "response_status": {
+                                    "type": "string",
+                                    "default": "SUCCESS"
+                                },
+                                "data": {
+                                    "type": "object",
+                                    "default": []
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "feeFrequencies"
+                ],
+                "summary": "Add feeFrequency",
+                "consumes": [
+                    "application/json"
+                ],
+                "parameters": [{
+                        "in": "header",
+                        "name": "Authorization",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "Bearer {token}"
+                    },
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "schema": {
+                            "$ref": "#/definitions/FeeFrequency"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "response_status": {
+                                    "type": "string",
+                                    "default": "SUCCESS"
+                                },
+                                "data": {
+                                    "type": "object",
+                                    "default": {}
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/feeFrequencies/{id}": {
+            "get": {
+                "tags": [
+                    "feeFrequencies"
+                ],
+                "summary": "Get feeFrequency by ID",
+                "consumes": [
+                    "application/json"
+                ],
+                "parameters": [{
+                        "in": "header",
+                        "name": "Authorization",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "Bearer {token}"
+                    },
+                    {
+                        "in": "path",
+                        "name": "id",
+                        "schema": {
+                            "type": "integer"
+                        },
+                        "description": "feeFrequency ID"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "response_status": {
+                                    "type": "string",
+                                    "default": "SUCCESS"
+                                },
+                                "data": {
+                                    "type": "object",
+                                    "default": {}
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "feeFrequencies"
+                ],
+                "summary": "Update feeFrequency by user ID",
+                "consumes": [
+                    "application/json"
+                ],
+                "parameters": [{
+                        "in": "header",
+                        "name": "Authorization",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "Bearer {token}"
+                    },
+                    {
+                        "in": "path",
+                        "name": "id",
+                        "schema": {
+                            "type": "integer"
+                        },
+                        "description": "feeFrequency ID"
+                    },
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "schema": {
+                            "$ref": "#/definitions/FeeFrequency"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "response_status": {
+                                    "type": "string",
+                                    "default": "SUCCESS"
+                                },
+                                "message": {
+                                    "type": "string",
+                                    "default": "User was updated successfully"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "feeFrequencies"
+                ],
+                "summary": "Delete feeFrequency by ID",
+                "consumes": [
+                    "application/json"
+                ],
+                "parameters": [{
+                        "in": "header",
+                        "name": "Authorization",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "Bearer {token}"
+                    },
+                    {
+                        "in": "path",
+                        "name": "id",
+                        "schema": {
+                            "type": "integer"
+                        },
+                        "description": "feeFrequency ID"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "response_status": {
+                                    "type": "string",
+                                    "default": "SUCCESS"
+                                },
+                                "data": {
+                                    "type": "object",
+                                    "default": {}
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/termOfServices": {
+            "get": {
+                "tags": [
+                    "termOfServices"
+                ],
+                "summary": "Get all termOfServices",
+                "consumes": [
+                    "application/json"
+                ],
+                "parameters": [{
+                    "in": "header",
+                    "name": "Authorization",
+                    "schema": {
+                        "type": "string"
+                    },
+                    "description": "Bearer {token}"
+                }],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "response_status": {
+                                    "type": "string",
+                                    "default": "SUCCESS"
+                                },
+                                "data": {
+                                    "type": "object",
+                                    "default": []
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "termOfServices"
+                ],
+                "summary": "Add or Update termOfService",
+                "consumes": [
+                    "application/json"
+                ],
+                "parameters": [{
+                        "in": "header",
+                        "name": "Authorization",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "Bearer {token}"
+                    },
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "schema": {
+                            "$ref": "#/definitions/TermOfService"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "response_status": {
+                                    "type": "string",
+                                    "default": "SUCCESS"
+                                },
+                                "data": {
+                                    "type": "object",
+                                    "default": {}
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/tips": {
+            "get": {
+                "tags": [
+                    "Tips"
+                ],
+                "summary": "Get all Tips",
+                "consumes": [
+                    "application/json"
+                ],
+                "parameters": [{
+                    "in": "header",
+                    "name": "Authorization",
+                    "schema": {
+                        "type": "string"
+                    },
+                    "description": "Bearer {token}"
+                }],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "response_status": {
+                                    "type": "string",
+                                    "default": "SUCCESS"
+                                },
+                                "data": {
+                                    "type": "object",
+                                    "default": []
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Tips"
+                ],
+                "summary": "Add Tips",
+                "consumes": [
+                    "application/json"
+                ],
+                "parameters": [{
+                        "in": "header",
+                        "name": "Authorization",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "Bearer {token}"
+                    },
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "schema": {
+                            "$ref": "#/definitions/Tips"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "response_status": {
+                                    "type": "string",
+                                    "default": "SUCCESS"
+                                },
+                                "data": {
+                                    "type": "object",
+                                    "default": {}
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/favorites/findByUserId/{id}": {
+            "get": {
+                "tags": [
+                    "Favorites"
+                ],
+                "summary": "Get all Favorites by Logedin User ID",
+                "consumes": [
+                    "application/json"
+                ],
+                "parameters": [{
+                    "in": "header",
+                    "name": "Authorization",
+                    "schema": {
+                        "type": "string"
+                    },
+                    "description": "Bearer {token}"
+                }],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "response_status": {
+                                    "type": "string",
+                                    "default": "SUCCESS"
+                                },
+                                "data": {
+                                    "type": "object",
+                                    "default": []
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/favorites": {
+            "post": {
+                "tags": [
+                    "Favorites"
+                ],
+                "summary": "Add Favorite",
+                "consumes": [
+                    "application/json"
+                ],
+                "parameters": [{
+                        "in": "header",
+                        "name": "Authorization",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "Bearer {token}"
+                    },
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "schema": {
+                            "$ref": "#/definitions/Favorites"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "response_status": {
+                                    "type": "string",
+                                    "default": "SUCCESS"
+                                },
+                                "data": {
+                                    "type": "object",
+                                    "default": {}
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/viewUserLogs": {
+            "post": {
+                "tags": [
+                    "View User Logs"
+                ],
+                "summary": "บันทึก Logs การเปิดดู Profile",
+                "consumes": [
+                    "application/json"
+                ],
+                "parameters": [{
+                        "in": "header",
+                        "name": "Authorization",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "Bearer {token}"
+                    },
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "schema": {
+                            "$ref": "#/definitions/ViewUserLog"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "response_status": {
+                                    "type": "string",
+                                    "default": "SUCCESS"
+                                },
+                                "data": {
+                                    "type": "object",
+                                    "default": []
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/viewUserLogs/isView": {
+            "post": {
+                "tags": [
+                    "View User Logs"
+                ],
+                "summary": "ตรวจสอบ Logs การเปิดดู Profile",
+                "consumes": [
+                    "application/json"
+                ],
+                "parameters": [{
+                        "in": "header",
+                        "name": "Authorization",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "Bearer {token}"
+                    },
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "schema": {
+                            "$ref": "#/definitions/ViewUserLog"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "response_status": {
+                                    "type": "string",
+                                    "default": "SUCCESS"
+                                },
+                                "data": {
+                                    "type": "object",
+                                    "default": []
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "definitions": {
+        "User": {
+            "type": "object",
+            "properties": {
+                "email": {
+                    "type": "string",
+                    "default": "admin2",
+                    "description": "อีเมล"
+                },
+                "password": {
+                    "type": "string",
+                    "default": "1234",
+                    "description": "รหัสผ่าน"
+                },
+                "firstName": {
+                    "type": "string",
+                    "default": "firstName",
+                    "description": "ชื่อ"
+                },
+                "lastName": {
+                    "type": "string",
+                    "default": "lastName",
+                    "description": "สกุล"
+                },
+                "telCode": {
+                    "type": "string",
+                    "default": "+66",
+                    "description": "+66 โค้ดประเทศ"
+                },
+                "telNumber": {
+                    "type": "string",
+                    "default": "123456789",
+                    "description": "เลขโทรศัพท์ที่เหลือ"
+                },
+                "line": {
+                    "type": "string",
+                    "default": "lineID",
+                    "description": "ไลน์ไอดี"
+                },
+                "gender": {
+                    "type": "string",
+                    "default": "MALE",
+                    "description": "เพศ ระบุ `MALE`, `FEMALE`, `` (ว่าง = ไม่ระบุ)"
+                },
+                "age": {
+                    "type": "integer",
+                    "default": "18",
+                    "description": "อายุ"
+                },
+                "licenseNo": {
+                    "type": "string",
+                    "default": "1234",
+                    "description": "เลขที่ใบประกาศณียบัตร"
+                },
+                "school": {
+                    "type": "string",
+                    "default": "สถาบัน",
+                    "description": "สถาบัน"
+                },
+                "experience": {
+                    "type": "string",
+                    "default": "ประสบการณ์",
+                    "description": "ประสบการณ์"
+                },
+                "allergy": {
+                    "type": "string",
+                    "default": "โรคประจำตัว",
+                    "description": "โรคประจำตัว"
+                },
+                "minFee": {
+                    "type": "double",
+                    "default": 0,
+                    "description": "ค่าบริการขั้นต่ำ"
+                },
+                "maxFee": {
+                    "type": "double",
+                    "default": 0,
+                    "description": "ค่าบริการสูงสุด"
+                },
+                "province": {
+                    "type": "string",
+                    "default": "จังหวัด",
+                    "description": "จังหวัด"
+                },
+                "lat": {
+                    "type": "double",
+                    "default": 0,
+                    "description": "เขตสถานที่ให้บริการ - ละติจูด"
+                },
+                "lng": {
+                    "type": "double",
+                    "default": 0,
+                    "description": "เขตสถานที่ให้บริการ - ลองติจูด"
+                },
+                "schedule": {
+                    "type": "object",
+                    "default": [
+                        0,
+                        1,
+                        2
+                    ],
+                    "description": "ตารางงาน `0` = จ., `1` = อ., `2` = พ., `3` = พฤ., `4` = ศ., `5` = ส., `6` = อา."
+                },
+                "skills": {
+                    "type": "object",
+                    "default": [
+                        1,
+                        2,
+                        10
+                    ],
+                    "description": "Array of ID ของทักษะที่สามรถทำได้"
+                },
+                "profileImages": {
+                    "type": "object",
+                    "default": [
+                        1,
+                        2,
+                        3
+                    ],
+                    "description": "Array of ID ของ file ที่อัพโหลดไป"
+                },
+                "role": {
+                    "type": "string",
+                    "default": "USER",
+                    "description": "role ผู้ใช้งาน `USER`, `EXPERT`"
+                },
+                "isPro": {
+                    "type": "boolean",
+                    "default": false,
+                    "description": "Health Express Pro `true`, `false`"
+                },
+                "jobId": {
+                    "default": 1,
+                    "description": "ID ตำแหน่งอาชีพ"
+                },
+                "educationId": {
+                    "default": 1,
+                    "description": "ID ระดับการศึกษา"
+                },
+                "licenseId": {
+                    "default": 1,
+                    "description": "ID ประกาศณียบัตร"
+                },
+                "serviceTypeId": {
+                    "default": 1,
+                    "description": "ID ลักษณะการให้บริการ"
+                },
+                "feeCurrencyId": {
+                    "default": 1,
+                    "description": "ID หน่วยเงินการให้บริการ"
+                },
+                "feeFrequencyId": {
+                    "default": 1,
+                    "description": "ID การให้บริการ (ครั้ง, สัปดาห์, เดือน)"
+                },
+                "isPublic": {
+                    "default": 1,
+                    "description": "Is Public Profile `true`, `false` "
+                }
+            }
+        },
+        "Skill": {
+            "type": "object",
+            "properties": {
+                "name": {
+                    "type": "string",
+                    "default": "ผ่าตัด",
+                    "description": "ทักษะ"
+                },
+                "isCustom": {
+                    "type": "boolean",
+                    "default": false,
+                    "description": "เป็นข้อที่ระบุอื่น ๆ หรือไม่"
+                }
+            }
+        },
+        "Job": {
+            "type": "object",
+            "properties": {
+                "name": {
+                    "type": "string",
+                    "default": "พยาบาล (RN)",
+                    "description": "อาชีพ"
+                },
+                "isCustom": {
+                    "type": "boolean",
+                    "default": false,
+                    "description": "เป็นข้อที่ระบุอื่น ๆ หรือไม่"
+                }
+            }
+        },
+        "Education": {
+            "type": "object",
+            "properties": {
+                "name": {
+                    "type": "string",
+                    "default": "ประถมศึกษาชั้นปีที่ 6",
+                    "description": "ระดับการศึกษา"
+                },
+                "isCustom": {
+                    "type": "boolean",
+                    "default": false,
+                    "description": "เป็นข้อที่ระบุอื่น ๆ หรือไม่"
+                }
+            }
+        },
+        "License": {
+            "type": "object",
+            "properties": {
+                "name": {
+                    "type": "string",
+                    "default": "ใบอนุญาตประกอบวิชาชีพการพยาบาลและการผดุงครรภ์ฯ",
+                    "description": "ประกาศณียบัตร"
+                },
+                "isCustom": {
+                    "type": "boolean",
+                    "default": false,
+                    "description": "เป็นข้อที่ระบุอื่น ๆ หรือไม่"
+                }
+            }
+        },
+        "ServiceType": {
+            "type": "object",
+            "properties": {
+                "name": {
+                    "type": "string",
+                    "default": "ฟูลไทม์",
+                    "description": "ลักษณะการบริการ"
+                },
+                "isCustom": {
+                    "type": "boolean",
+                    "default": false,
+                    "description": "เป็นข้อที่ระบุอื่น ๆ หรือไม่"
+                }
+            }
+        },
+        "FeeCurrency": {
+            "type": "object",
+            "properties": {
+                "name": {
+                    "type": "string",
+                    "default": "บาท",
+                    "description": "หน่วยเงินค่าบริการ"
+                },
+                "isCustom": {
+                    "type": "boolean",
+                    "default": false,
+                    "description": "เป็นข้อที่ระบุอื่น ๆ หรือไม่"
+                }
+            }
+        },
+        "FeeFrequency": {
+            "type": "object",
+            "properties": {
+                "name": {
+                    "type": "string",
+                    "default": "ครั้ง",
+                    "description": "ค่าบริการต่อ ..."
+                },
+                "isCustom": {
+                    "type": "boolean",
+                    "default": false,
+                    "description": "เป็นข้อที่ระบุอื่น ๆ หรือไม่"
+                }
+            }
+        },
+        "Base64File": {
+            "type": "object",
+            "properties": {
+                "file": {
+                    "type": "string",
+                    "default": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAJYAAACWBAMAAADOL2zRAAAAGFBMVEUAAP+AgIAQEO8wMM9QUK8gIN9AQL9gYJ8HzZppAAAACXBIWXMAAA7EAAAOxAGVKw4bAAAAWElEQVRoge3SUQmAQBRE0WXRAC+C22AjbBcL2P9HQwwick6ACwPTGgAAAADfcFSuNYOtlWv1yrW2XKuvVGs/r0q1noG/b/UxRvATTUtLS0tLSwsAAADgTTdZSAdIz1EiEwAAAABJRU5ErkJggg==",
+                    "description": "The file to upload."
+                },
+                "type": {
+                    "type": "string",
+                    "default": "profile",
+                    "description": "type of file"
+                }
+            }
+        },
+        "TermOfService": {
+            "type": "object",
+            "properties": {
+                "text": {
+                    "type": "string",
+                    "default": "This Site may contain links to other independent third-party Web sites (\"Linked Sites\"). These Linked Sites are provided solely as a convenience to our visitors. Such Linked Sites are not under our control, and we are not responsible for and does not endorse the content of such Linked Sites, including any information or materials contained on such Linked Sites. You will need to make your own independent judgment regarding your interaction with these Linked Sites.",
+                    "description": "Term Of Service"
+                }
+            }
+        },
+        "Tips": {
+            "type": "object",
+            "properties": {
+                "indexNumber": {
+                    "type": "integer",
+                    "default": "1",
+                    "description": "ลำดับ"
+                },
+                "headerImg": {
+                    "type": "string",
+                    "default": "url",
+                    "description": "รูปหลัก"
+                },
+                "shortDesc": {
+                    "type": "string",
+                    "default": "คำอธิบายแบบสั้น",
+                    "description": "คำอธิบายแบบสั้น"
+                },
+                "desc": {
+                    "type": "string",
+                    "default": "คำอธิบายเต็ม",
+                    "description": "คำอธิบายเต็ม"
+                }
+            }
+        },
+        "Favorites": {
+            "type": "object",
+            "properties": {
+                "ownerFavUserId": {
+                    "type": "integer",
+                    "default": "1",
+                    "description": "UserId ของคนที่ login"
+                },
+                "userId": {
+                    "type": "integer",
+                    "default": "2",
+                    "description": "UserId ของคนที่กดถูกใจ"
+                }
+            }
+        },
+        "ViewUserLog": {
+            "type": "object",
+            "properties": {
+                "userId": {
+                    "type": "integer",
+                    "default": "1",
+                    "description": "UserId ของคนที่ login"
+                },
+                "viewUserId": {
+                    "type": "integer",
+                    "default": "2",
+                    "description": "UserId ของคนที่จะดู"
+                }
+            }
+        }
+    }
+}
