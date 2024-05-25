@@ -3,6 +3,9 @@ export default (sequelize, Sequelize) => {
     playlistNo: {
       type: Sequelize.INTEGER,
     },
+    playing: {
+      type: Sequelize.BOOLEAN,
+    },
   });
 
   return PlaylistItems;

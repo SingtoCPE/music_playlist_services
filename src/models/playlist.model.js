@@ -4,7 +4,7 @@ export default (sequelize, Sequelize) => {
       type: Sequelize.STRING,
     },
     description: {
-      type: Sequelize.DOUBLE,
+      type: Sequelize.STRING,
     },
     createBy: {
       type: Sequelize.STRING,
@@ -13,7 +13,7 @@ export default (sequelize, Sequelize) => {
       type: Sequelize.INTEGER,
     },
     longTerm: {
-      type: Sequelize.STRING,
+      type: Sequelize.INTEGER,
     },
     activeFlag: {
       type: Sequelize.BOOLEAN,

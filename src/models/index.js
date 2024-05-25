@@ -35,5 +35,6 @@ db.Playlist.hasMany(db.PlaylistItems);
 db.PlaylistItems.belongsTo(db.Playlist);
 
 db.Music.hasMany(db.PlaylistItems);
+db.PlaylistItems.belongsTo(db.Music);
 
 export default db;

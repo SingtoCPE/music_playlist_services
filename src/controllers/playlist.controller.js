@@ -1,25 +1,50 @@
 import db from "~/models";
 
-const Content = db.Content;
+const Playlist = db.Playlist;
+const PlaylistItems = db.PlaylistItems;
 const Op = db.Sequelize.Op;
 
 const create = async (req, res) => {
   try {
     const payload = req.body;
 
-    Content.create(payload).then((result) => {
+    Playlist.create(payload).then((result) => {
       res.send({
         response_code: "200",
         response_status: "SUCCESS",
         data: result,
-        message: "Employee is created",
+        message: "Playlist is created",
       });
     });
   } catch (error) {
     res.send({
       response_status: "ERROR",
       message:
-        error.message || "Some error occurred while creating the employee.",
+        error.message || "Some error occurred while creating the Playlist.",
+    });
+  }
+};
+
+const createPlaylistItem = async (req, res) => {
+  try {
+    const payload = req.body;
+
+    console.log(123);
+
+    PlaylistItems.create(payload).then((result) => {
+      res.send({
+        response_code: "200",
+        response_status: "SUCCESS",
+        data: result,
+        message: "Playlist item is created",
+      });
+    });
+  } catch (error) {
+    res.send({
+      response_status: "ERROR",
+      message:
+        error.message ||
+        "Some error occurred while creating the Playlist item.",
     });
   }
 };
@@ -54,7 +79,7 @@ const findAll = async (req, res) => {
         }
       });
 
-      Content.findAndCountAll({
+      Playlist.findAndCountAll({
         where,
         include: { all: true, nested: true },
         offset: pagination.offset,
@@ -72,7 +97,7 @@ const findAll = async (req, res) => {
         });
       });
     } else {
-      Content.findAndCountAll({
+      Playlist.findAndCountAll({
         include: { all: true, nested: true },
         order: [["createdAt", "DESC"]],
       }).then(async (result) => {
@@ -91,7 +116,7 @@ const findAll = async (req, res) => {
     res.send({
       response_status: "ERROR",
       message:
-        error.message || "Some error occurred while fetching the employee.",
+        error.message || "Some error occurred while fetching the Playlist.",
     });
   }
 };
@@ -100,9 +125,14 @@ const findOne = async (req, res) => {
   try {
     const id = req.params.id;
 
-    Content.findOne({
+    Playlist.findOne({
       where: { id },
-      include: { all: true, nested: true },
+      include: [
+        {
+          model: PlaylistItems,
+          include: "music",
+        },
+      ],
     }).then((result) => {
       res.send({
         response_code: "200",
@@ -114,30 +144,7 @@ const findOne = async (req, res) => {
     res.send({
       response_status: "ERROR",
       message:
-        err.message || "Some error occurred while retrieving the employee.",
-    });
-  }
-};
-
-const findOneByPath = async (req, res) => {
-  try {
-    const path = req.params.path;
-
-    Content.findOne({
-      where: { path: path },
-      include: { all: true, nested: true },
-    }).then((result) => {
-      res.send({
-        response_code: "200",
-        response_status: "SUCCESS",
-        data: result,
-      });
-    });
-  } catch (err) {
-    res.send({
-      response_status: "ERROR",
-      message:
-        err.message || "Some error occurred while retrieving the employee.",
+        err.message || "Some error occurred while retrieving the Playlist.",
     });
   }
 };
@@ -146,12 +153,12 @@ const update = async (req, res) => {
   try {
     const id = req.params.id;
 
-    Content.update(req.body, { where: { id } }).then((result) => {
+    Playlist.update(req.body, { where: { id } }).then((result) => {
       if (result[0] === 1) {
         res.send({
           response_code: "200",
           response_status: "SUCCESS",
-          message: "Employee is updated",
+          message: "Playlist is updated",
         });
       } else {
         res.send({
@@ -165,7 +172,7 @@ const update = async (req, res) => {
     res.send({
       response_status: "ERROR",
       message:
-        err.message || "Some error occurred while updating the employee.",
+        err.message || "Some error occurred while updating the Playlist.",
     });
   }
 };
@@ -173,12 +180,12 @@ const update = async (req, res) => {
 const remove = async (req, res) => {
   try {
     const id = req.params.id;
-    Content.destroy({ where: { id } }).then((result) => {
+    Playlist.destroy({ where: { id } }).then((result) => {
       if (result === 1) {
         res.send({
           response_code: "200",
           response_status: "SUCCESS",
-          message: "Employee is deleted",
+          message: "Playlist is deleted",
         });
       } else {
         res.send({
@@ -192,7 +199,34 @@ const remove = async (req, res) => {
     res.send({
       response_status: "ERROR",
       message:
-        err.message || "Some error occurred while deleting the employee.",
+        err.message || "Some error occurred while deleting the Playlist.",
+    });
+  }
+};
+
+const removePlaylistItem = async (req, res) => {
+  try {
+    const id = req.params.id;
+    PlaylistItems.destroy({ where: { id } }).then((result) => {
+      if (result === 1) {
+        res.send({
+          response_code: "200",
+          response_status: "SUCCESS",
+          message: "Playlist items is deleted",
+        });
+      } else {
+        res.send({
+          response_code: "111",
+          response_status: "ERROR",
+          message: "Delete failed",
+        });
+      }
+    });
+  } catch (err) {
+    res.send({
+      response_status: "ERROR",
+      message:
+        err.message || "Some error occurred while deleting the Playlist.",
     });
   }
 };
@@ -201,21 +235,12 @@ const calPagination = async (length, rowPerPage) => {
   return Math.round(length / rowPerPage);
 };
 
-function pad_with_zeroes(number, lenght) {
-  var my_string = "" + number;
-  while (my_string.length < lenght) {
-    my_string = "0" + my_string;
-  }
-  my_string = "88" + my_string;
-
-  return my_string;
-}
-
 export default {
   create,
   findAll,
   update,
   findOne,
-  findOneByPath,
   remove,
+  createPlaylistItem,
+  removePlaylistItem,
 };

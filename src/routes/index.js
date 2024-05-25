@@ -1,12 +1,10 @@
 import swaggerRoutes from "./swagger.route";
 
-import employeeRoutes from "./employee.route";
-import contentRoutes from "./content.route";
-import fileRoutes from "./file.route";
+import musicRoutes from "./music.route";
+import playlistRoutes from "./playlist.route";
 
 export default (app) => {
   app.use("/", swaggerRoutes);
-  app.use("/employee", employeeRoutes);
-  app.use("/upload", fileRoutes);
-  app.use("/content", contentRoutes);
+  app.use("/music", musicRoutes);
+  app.use("/playlist", playlistRoutes);
 };

@@ -4,10 +4,13 @@ export default (sequelize, Sequelize) => {
       type: Sequelize.STRING,
     },
     artist: {
-      type: Sequelize.DOUBLE,
+      type: Sequelize.STRING,
     },
     album: {
       type: Sequelize.STRING,
+    },
+    length: {
+      type: Sequelize.INTEGER,
     },
     activeFlag: {
       type: Sequelize.BOOLEAN,
